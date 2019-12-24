@@ -1,5 +1,7 @@
 # LargerWorkbenches
-This mod adds some workbenches which can do more than 3x3 crafting.
+This mod adds some workbenches which can do more than 3x3 crafting.<br>
+
+Releases: https://github.com/GWPlusPlus/GWPPWorkbenches/releases
 
 ----
 ## MineTweaker, CraftTweaker
