@@ -1,29 +1,28 @@
-/**
- * itemGroup.tabLargerWorkbenches=
- *
- * tile.workbench.0.name=
- * tile.workbench.1.name=
- * tile.workbench.2.name=
- * tile.workbench.3.name=
- * tile.workbench.4.name=
- * tile.workbench.5.name=
- * tile.autoWorkbench.0.name=
- * tile.autoWorkbench.1.name=
- * tile.autoWorkbench.2.name=
- * tile.autoWorkbench.3.name=
- * tile.autoWorkbench.4.name=
- * tile.autoWorkbench.5.name=
- *
- * crafting.large.tier0=
- * crafting.large.tier1=
- * crafting.large.tier2=
- * crafting.large.tier3=
- * crafting.large.tier4=
- * crafting.large.tier5=
- * crafting.large.shapeless.tier0=
- * crafting.large.shapeless.tier1=
- * crafting.large.shapeless.tier2=
- * crafting.large.shapeless.tier3=
- * crafting.large.shapeless.tier4=
- * crafting.large.shapeless.tier5=
- */
+
+itemGroup.tabLargerWorkbenches=GW:PP Workbenches
+
+tile.workbench.0.name=ErrorGW:PP
+tile.workbench.1.name=Advanced Crafting Table
+tile.workbench.2.name=ErrorGW:PP
+tile.workbench.3.name=Extreme Crafting Table
+tile.workbench.4.name=ErrorGW:PP
+tile.workbench.5.name=Insane Crafting Table
+tile.autoWorkbench.0.name=ErrorGW:PP
+tile.autoWorkbench.1.name=Advanced Autorafting Table
+tile.autoWorkbench.2.name=ErrorGW:PP
+tile.autoWorkbench.3.name=Extreme Autorafting Table
+tile.autoWorkbench.4.name=ErrorGW:PP
+tile.autoWorkbench.5.name=Insane Autorafting Table
+
+crafting.large.tier0=ErrorGW:PP
+crafting.large.tier1=Advanced Crafting Table
+crafting.large.tier2=ErrorGW:PP
+crafting.large.tier3=Extreme Crafting Table
+crafting.large.tier4=ErrorGW:PP
+crafting.large.tier5=Insane Crafting Table
+crafting.large.shapeless.tier0=ErrorGW:PP
+crafting.large.shapeless.tier1=Advanced Crafting Table
+crafting.large.shapeless.tier2=ErrorGW:PP
+crafting.large.shapeless.tier3=Extreme Crafting Table
+crafting.large.shapeless.tier4=ErrorGW:PP
+crafting.large.shapeless.tier5=Insane Crafting Table
