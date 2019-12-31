@@ -43,7 +43,7 @@ public class BlockAutoLargeWorkbench extends BlockLargeWorkbench {
 		super.onNeighborChange(world, x, y, z, tileX, tileY, tileZ);
 		TileEntity te = world.getTileEntity(x,y,z);
 		if(te instanceof TileEntityAutoLargeWorkbench){
-			((TileEntityAutoLargeWorkbench)te).onSideUpdated(tileX, tileY, tileZ);
+			((TileEntityAutoLargeWorkbench)te).teAdded();
 		}
 	}
 }

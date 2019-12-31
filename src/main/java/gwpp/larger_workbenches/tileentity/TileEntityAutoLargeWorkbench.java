@@ -128,6 +128,14 @@ public class TileEntityAutoLargeWorkbench extends TileEntityLargeWorkbench imple
 		}
 	}
 
+	public void teAdded(){
+		onSideUpdated(xCoord,yCoord+1,zCoord);
+		onSideUpdated(xCoord+1,yCoord,zCoord);
+		onSideUpdated(xCoord-1,yCoord,zCoord);
+		onSideUpdated(xCoord,yCoord,zCoord+1);
+		onSideUpdated(xCoord+1,yCoord,zCoord-1);
+	}
+
 	private boolean tryOutput(ItemStack is, int outputStackSize){
 		if(nearInvertory!=null&&!nearInvertory.isInvalid()){
 			IInventory inv = (IInventory)nearInvertory;
