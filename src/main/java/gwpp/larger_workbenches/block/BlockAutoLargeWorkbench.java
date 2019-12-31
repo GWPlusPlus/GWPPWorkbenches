@@ -1,15 +1,11 @@
 package gwpp.larger_workbenches.block;
 
+import gwpp.larger_workbenches.tileentity.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import gwpp.larger_workbenches.LargerWorkbenches;
-import gwpp.larger_workbenches.tileentity.TileEntityAutoLargeWorkbench4x4;
-import gwpp.larger_workbenches.tileentity.TileEntityAutoLargeWorkbench5x5;
-import gwpp.larger_workbenches.tileentity.TileEntityAutoLargeWorkbench6x6;
-import gwpp.larger_workbenches.tileentity.TileEntityAutoLargeWorkbench7x7;
-import gwpp.larger_workbenches.tileentity.TileEntityAutoLargeWorkbench8x8;
-import gwpp.larger_workbenches.tileentity.TileEntityAutoLargeWorkbench9x9;
 
 public class BlockAutoLargeWorkbench extends BlockLargeWorkbench {
 
@@ -40,5 +36,14 @@ public class BlockAutoLargeWorkbench extends BlockLargeWorkbench {
 			return new TileEntityAutoLargeWorkbench9x9();
 		}
 		return new TileEntityAutoLargeWorkbench4x4();
+	}
+
+	@Override
+	public void onNeighborChange(IBlockAccess world, int x, int y, int z, int tileX, int tileY, int tileZ) {
+		super.onNeighborChange(world, x, y, z, tileX, tileY, tileZ);
+		TileEntity te = world.getTileEntity(x,y,z);
+		if(te instanceof TileEntityAutoLargeWorkbench){
+			((TileEntityAutoLargeWorkbench)te).onSideUpdated(tileX, tileY, tileZ);
+		}
 	}
 }

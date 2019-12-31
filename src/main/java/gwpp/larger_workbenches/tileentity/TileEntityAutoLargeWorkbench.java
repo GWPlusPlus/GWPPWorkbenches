@@ -12,6 +12,8 @@ import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraftforge.oredict.OreDictionary;
 import gwpp.larger_workbenches.crafting.LargeCraftingManager;
@@ -24,6 +26,7 @@ public class TileEntityAutoLargeWorkbench extends TileEntityLargeWorkbench imple
 	private int[] slotsForAllSides;
 	protected boolean recipeChanged = true;
 	protected TIntIntMap patternMap = null;
+	private TileEntity nearInvertory = null;
 
 	public TileEntityAutoLargeWorkbench(int meta) {
 		super(meta);
@@ -70,10 +73,19 @@ public class TileEntityAutoLargeWorkbench extends TileEntityLargeWorkbench imple
 		if (patternMap == null)
 			return;
 		ItemStack outputStack = result;
+		if(nearInvertory==null || nearInvertory.isInvalid()){
+			onSideUpdated(xCoord,yCoord+1,zCoord);
+			onSideUpdated(xCoord+1,yCoord,zCoord);
+			onSideUpdated(xCoord-1,yCoord,zCoord);
+			onSideUpdated(xCoord,yCoord,zCoord+1);
+			onSideUpdated(xCoord+1,yCoord,zCoord-1);
+		}
 		if (outputStack == null || outputStack.stackSize + outputStackSize > outputStack.getMaxStackSize() || !matches(getSmartKeySizeMap(0, inventory, matrix), patternMap))
 			return;
 		cleanInput();
+		if(!tryOutput(outputStack,outputStackSize))
 		outputStack.stackSize += outputStackSize;
+
 		markDirty();
 	}
 
@@ -107,6 +119,31 @@ public class TileEntityAutoLargeWorkbench extends TileEntityLargeWorkbench imple
 					matrix[i] = null;
 			}
 		}
+	}
+
+	public void onSideUpdated(int x, int y, int z){
+		TileEntity te = getWorldObj().getTileEntity(x,y,z);
+		if(te instanceof IInventory && ( nearInvertory == null || nearInvertory.isInvalid())){
+			nearInvertory = te;
+		}
+	}
+
+	private boolean tryOutput(ItemStack is, int outputStackSize){
+		if(nearInvertory!=null&&!nearInvertory.isInvalid()){
+			IInventory inv = (IInventory)nearInvertory;
+			for(int i = 0; i < inv.getSizeInventory(); i++){
+				ItemStack stack = inv.getStackInSlot(i);
+				if(stack==null){
+					inv.setInventorySlotContents(i,new ItemStack(is.getItem(),outputStackSize,is.getItemDamage()));
+					return true;
+				}
+				else if(stack.isItemEqual(is)&&(stack.stackSize+outputStackSize)<=64) {
+					inv.setInventorySlotContents(i,new ItemStack(is.getItem(),outputStackSize+stack.stackSize,is.getItemDamage()));
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	protected int get(ItemStack itemStack) {
@@ -191,6 +228,19 @@ public class TileEntityAutoLargeWorkbench extends TileEntityLargeWorkbench imple
 
 	public boolean canExtractItem(int slot, ItemStack itemStack, int side) {
 		return slot == 0 && result != null && result.stackSize > 0;
+	}
+
+	@Override
+	public void readFromNBT(NBTTagCompound nbtTagCompound) {
+		super.readFromNBT(nbtTagCompound);
+		recipeChanged = true;
+		outputStackSize = nbtTagCompound.getInteger("stackSize");
+	}
+
+	@Override
+	public void writeToNBT(NBTTagCompound nbtTagCompound) {
+		super.writeToNBT(nbtTagCompound);
+		nbtTagCompound.setInteger("stackSize",outputStackSize);
 	}
 
 	public class LargeCraftingMatrix extends InventoryCraftingBase {
