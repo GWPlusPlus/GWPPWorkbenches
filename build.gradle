@@ -17,9 +17,9 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "0.0.1"
+version = "0.0.2-universal"
 group= "com.gwpp.GWPPWorkbenches" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "GWPPWorkbenches-1.7.10-0.0.1-universal"
+archivesBaseName = "GWPPWorkbenches-1.7.10"
 
 minecraft {
     version = "1.7.10-10.13.4.1614-1.7.10"
